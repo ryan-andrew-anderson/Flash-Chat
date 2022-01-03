@@ -19,6 +19,5 @@ class ChatViewController: UIViewController {
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {
-        git ignore swift,macos ].gitignore
     }
 }
