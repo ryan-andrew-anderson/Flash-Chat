@@ -12,11 +12,10 @@ import CLTypingLabel
 class WelcomeViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: CLTypingLabel!
-    
-    let f = CLTypingLabel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        titleLabel.text = K.name     
+        titleLabel.text = K.name
     }
 }

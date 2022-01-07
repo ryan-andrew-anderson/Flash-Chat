@@ -23,6 +23,7 @@ class  RegisterViewController: UIViewController {
                 } else {
                     // Navigate to the chatViewController
                     self.performSegue(withIdentifier: K.registerSegue, sender: self)
+                    print("Registered New User")
                 }
             }
         }
