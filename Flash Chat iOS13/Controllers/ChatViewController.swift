@@ -7,15 +7,30 @@
 //
 
 import UIKit
+import Firebase
 
 class ChatViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextfield: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = K.name
+        navigationItem.hidesBackButton = true
+        
+    }
+    
+    @IBAction func logoutPressed(_ sender: UIBarButtonItem) {
+        do {
+            try Auth.auth().signOut()
+            // if signout() is successful, go back to the rootController  (WelcomeviewController)
+            navigationController?.popToRootViewController(animated: true)
+            print("Logged Out")
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
+        
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {

@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import CoreMedia
 
 class  RegisterViewController: UIViewController {
     
@@ -20,10 +19,10 @@ class  RegisterViewController: UIViewController {
         if let email =  emailTextfield.text, let password = passwordTextfield.text {
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let err = error {
-                    print(err.localizedDescription )
+                    print(err.localizedDescription)
                 } else {
                     // Navigate to the chatViewController
-                    self.performSegue(withIdentifier: "RegisterToChat", sender: self)
+                    self.performSegue(withIdentifier: K.registerSegue, sender: self)
                 }
             }
         }
