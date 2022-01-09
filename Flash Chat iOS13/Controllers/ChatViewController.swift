@@ -44,7 +44,9 @@ class ChatViewController: UIViewController {
     
     func loadMessages() {
                 
-        db.collection(K.FStore.collectionName).addSnapshotListener { (querySnapshot, error)  in
+        db.collection(K.FStore.collectionName)
+            .order(by: K.FStore.dateField)
+            .addSnapshotListener { (querySnapshot, error)  in
             
             self.messages = []
              
@@ -55,7 +57,7 @@ class ChatViewController: UIViewController {
                   
                     for doc in snapshotDocument {
                         let data = doc.data()
-                        if let sender = data[K.FStore.senderField] as? String, let body = data[K.FStore.dateField] as? String {
+                        if let sender = data[K.FStore.senderField] as? String, let body = data[K.FStore.bodyField] as? String {
                             let newMessage = Message(sender: sender, body: body)
                             self.messages.append(newMessage)
                             
@@ -75,7 +77,8 @@ class ChatViewController: UIViewController {
         guard let messageBody = messageTextfield.text,let messageSender = Auth.auth().currentUser?.email else { return }
         db.collection(K.FStore.collectionName).addDocument(data: [
             K.FStore.senderField: messageSender,
-            K.FStore.dateField: messageBody
+            K.FStore.bodyField: messageBody,
+            K.FStore.dateField: Date().timeIntervalSince1970
         ]) { error in
             if let e = error {
                 print(e.localizedDescription)
