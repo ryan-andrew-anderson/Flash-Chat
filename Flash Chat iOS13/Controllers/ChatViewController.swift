@@ -16,18 +16,16 @@ class ChatViewController: UIViewController {
     
     let db = Firestore.firestore()
     
-    var messages: [Message] = [
-    ]
+    var messages: [Message] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.dataSource = self
         title = K.name
         navigationItem.hidesBackButton = true
         tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
         loadMessages()
-        
-        
     }
     
     @IBAction func logoutPressed(_ sender: UIBarButtonItem) {
@@ -40,7 +38,6 @@ class ChatViewController: UIViewController {
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
         }
-        
     }
     
     func loadMessages() {
@@ -90,7 +87,6 @@ class ChatViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.messageTextfield.text = ""
                 }
-                
             }
         }
     }
@@ -127,5 +123,3 @@ extension ChatViewController: UITableViewDataSource {
         return cell
     }
 }
-
-
